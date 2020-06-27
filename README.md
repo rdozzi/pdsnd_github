@@ -1,15 +1,15 @@
 ### Date created
-Include the date you created this project and README file.
+June 26, 2020
 
 ### Project Title
-Replace the Project Title
+Bikeshare Analysis from Motivate Data Set
 
 ### Description
-Describe what your project is about and what it does
+This program analyzes the bikeshare datasets of three different cities: New York City, Chicago, & Washington
 
 ### Files used
-Include the files used
+bikeshare_2.py and .csv files specific to New York City, Chicago, & Washington
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+www.udacity.com, www.motivateco.com
 
