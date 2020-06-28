@@ -15,8 +15,10 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
+    
+    
     # get user input for city (chicago, new york city, washington). 
-    # HINT: Use a while loop to handle invalid inputs
+    
     city_count = 0
     city_list = ['','chicago', 'new_york_city', 'washington']
     print('\n1 - Chicago\n2 - New York City\n3 - Washington\n')
@@ -26,7 +28,9 @@ def get_filters():
         except (NameError, SyntaxError):
             print('\nNot a number!')
 
+    
     # get user input for month (january, february, ... , all)
+    
     month_count = 0
     month_list = ['','january','february','march','april','may','june','all']
     print('\n1 - January\n2 - February \n3 - March\n4 - April \
@@ -37,7 +41,9 @@ def get_filters():
         except (NameError, SyntaxError):
             print('\nNot a number!')
         
+    
     # get user input for day of week (monday, tuesday, ... sunday, all)
+    
     day_count = 0
     day_list = ['', 'monday', 'tuesday', 'wednesday', 'thursday',
                 'friday', 'saturday', 'sunday','all']
@@ -64,28 +70,41 @@ def load_data(city, month, day):
         df - Pandas DataFrame containing city data filtered by month and day
     """
 
-    #Create a variable to load the city specific data
+    
+    # Variable created to load the city specific data
+    
     selected_city = city + '.csv'
 
-    #Load the list from the local machine
+    
+    # Load the list from the local machine
+    
     df = pd.read_csv('~/documents/Udacity_intro_python_ds/bikeshare-2/' + selected_city)
 
-    #Convert 'Start Time' 
+    
+    # Convert 'Start Time' 
+    
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
-    #Create new columns to filter data by month and day (w/ other columns)
+    
+    # Create new columns to filter data by month and day (w/ other columns)
+    # Format each new column to be a date-time object
+    
     df['Month'] = df['Start Time'].dt.month
     df['Day'] = df['Start Time'].dt.weekday
     df['Hour'] = df['Start Time'].dt.hour
 
-    #Filter by month if applicable
+    
+    # Filter by month if applicable
+    
     if month != 'all':
         month_list = ['january', 'february', 'march', 
                       'april', 'may', 'june']
         month = month_list.index(month) + 1
         df = df[df['Month'] == month]
     
-    #Filter by day
+    
+    # Filter by day
+    
     if day != 'all':
         day_list = ['monday', 'tuesday', 'wednesday', 'thursday', 
                     'friday', 'saturday', 'sunday']
@@ -100,10 +119,16 @@ def time_stats(df):
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
 
-    # display the most common month unless a month was selected
+    
+    # Display the most common month unless a month was selected
+    
     month_list = ['january', 'february', 'march', 
                   'april', 'may', 'june']
-    # Provide different speech output when user selects either 'all' or a specific month
+    
+    
+    # Provide different speech output when user selects either 
+    # 'all' or a specific month
+    
     if 1 in df['Month'].values and 2 in df['Month'].values:
         month_number = df['Month'].mode()[0]
         most_common_month = month_list[month_number-1].capitalize()
@@ -114,10 +139,17 @@ def time_stats(df):
         most_common_month = month_list[month_number-1].capitalize()
         most_common_month_speech = 'The month you selected is: '
 
-    # Display the most common day of week unless a specific day was selected
+    
+    # Display the most common day of week unless a specific 
+    # day was selected
+    
     day_list = ['monday', 'tuesday', 'wednesday', 'thursday', 
                 'friday', 'saturday', 'sunday']
-    # Provide different speech output when user selects either 'all' or a specific day
+    
+    
+    # Provide different speech output when user selects 
+    # either 'all' or a specific day
+    
     if 1 in df['Day'].values and 2 in df['Day'].values:
         day_number = df['Day'].mode()[0]
         most_common_day = day_list[day_number].capitalize()
@@ -128,7 +160,9 @@ def time_stats(df):
         most_common_day = day_list[day_number].capitalize()
         most_common_day_speech = 'The day you selected is: '
 
-    # display the most common start hour range
+    
+    # Display the most common start hour range
+    
     start_hour_int = df['Hour'].mode()[0]
     most_common_start_range = str(int(start_hour_int)) + ':00-' + \
                               str(int(start_hour_int+1)) + ':00'
@@ -146,13 +180,19 @@ def station_stats(df):
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
 
-    # display most commonly used start station
+    
+    # Display most commonly used start station
+    
     most_common_start_station = df['Start Station'].mode()[0]
 
-    # display most commonly used end station
+    
+    # Display most commonly used end station
+    
     most_common_end_station = df['End Station'].mode()[0]
 
-    # display most frequent combination of start station and end station trip
+    
+    # Display most frequent combination of start station and end station trip
+    
     group_df = df.groupby(['Start Station','End Station']).size().reset_index(name='Count')
     group_df = group_df.sort_values(by=['Count'], ascending=False)
     group_df = group_df.reset_index()
@@ -173,7 +213,9 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
-    # display total travel time
+    
+    # Display total travel time
+    
     sum_trip_duration = df['Trip Duration'].sum() / 60 / 60
     total_days = int(sum_trip_duration / 24)
     remainder_duration = float(sum_trip_duration % 24)
@@ -182,16 +224,21 @@ def trip_duration_stats(df):
     total_travel_time = '{} Days, {} Hours, {} Minutes'.format(total_days, 
                         remainder_hours, remainder_minutes)
 
-    # display mean travel time
+    
+    # Display mean travel time
+    
     mean_trip_duration = df['Trip Duration'].mean() / 60 / 60
-    #mean_days = int(mean_trip_duration / 24)
+    
+    
+    # mean_days = int(mean_trip_duration / 24)
+    
     remainder_mean = float(mean_trip_duration % 24)
     mean_hours = int(remainder_mean)
     mean_minutes = int(round((remainder_mean - mean_hours)*60,0))
     mean_travel_time = '{} Hours, {} Minutes'.format(mean_hours, mean_minutes)
 
-   # return mean_travel_time
-
+    # return mean_travel_time
+    
     return('The total travel time for the period selected is: {}\n' \
            'The average travel time for the period selected is: {}\n'.format
            (total_travel_time, mean_travel_time) + '\nThis took %s seconds.'
@@ -202,13 +249,15 @@ def user_stats(df):
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
-
+    
     # Display counts of user types
+    
     df_type_count = df.groupby(['User Type']).size().reset_index(name='Count')
     count_customer = df_type_count['Count'][0]
     count_subscriber = df_type_count['Count'][1]
 
     # Display counts of gender; WA has no gender data
+    
     if 'Gender' in df.columns:
         df_gender_count = df.groupby(['Gender']).size().reset_index(name='Count')
         count_female = df_gender_count['Count'][0]
@@ -218,12 +267,16 @@ def user_stats(df):
         count_male = 'N/A'
 
     # Display earliest, most recent, and most common year of birth; WA has no Birth Year Data
+    
     if 'Birth Year' in df.columns:
         df_yob = df['Birth Year'].dropna(axis = 0)
         df_yob = pd.to_datetime(df_yob, format = '%Y')
         df_yob = df_yob.dt.year
         df_yob = df_yob.reset_index().drop(columns = 'index')
-        #Remove birth years that are less than 1930. Beyond that seems erroneous
+    
+    # Remove birth years that are less than 1930. 
+    # Beyond that seems erroneous
+
         df_yob = df_yob[(df_yob['Birth Year'] >= 1930) & (df_yob['Birth Year'] <= 2010)]
         df_yob = df_yob.sort_values(by = 'Birth Year', ascending=False)
         df_yob = df_yob.reset_index().drop(columns = 'index')
@@ -236,6 +289,7 @@ def user_stats(df):
         most_common_yob = 'N/A'
 
     #ul = 'User List" to abbreviate return statement
+    
     ul = [count_customer, count_subscriber, count_female, \
     count_male, earliest_yob, most_recent_yob, most_common_yob]
 
