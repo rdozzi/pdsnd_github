@@ -27,13 +27,19 @@ The program asks the user select a city, either one or all months between Januar
 3) **Earliest, most recent, and most common** birth years among users
 
 ## Date created
-June 2020
+May-June 2020
 
 ## Files used
 bikeshare_2.py 
 
+## Software & Modules Used
+* Python 3.7.6
+* VS Code 1.46.1 
+* Pandas 1.01
+* Markdown Preview Enhanced 0.5.12
+
 ## Credits
 * Project assignment from: www.udacity.com, 
 * Project data supplied from: www.motivateco.com
-* Readme created with VS Code 1.46.1 & Markdown Preview Enhanced 0.5.12
+
 
