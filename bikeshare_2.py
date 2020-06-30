@@ -18,7 +18,14 @@ def get_filters():
     # get user input for city (chicago, new york city, washington). 
     # HINT: Use a while loop to handle invalid inputs
     city_count = 0
+    month_count = 0
+    day_count = 0
+    
     city_list = ['','chicago', 'new_york_city', 'washington']
+    month_list = ['','january','february','march','april','may','june','all']
+    day_list = ['', 'monday', 'tuesday', 'wednesday', 'thursday',
+                'friday', 'saturday', 'sunday','all']
+    
     print('\n1 - Chicago\n2 - New York City\n3 - Washington\n')
     while city_count not in range(1,4):
         try: 
@@ -27,8 +34,6 @@ def get_filters():
             print('\nNot a number!')
 
     # get user input for month (january, february, ... , all)
-    month_count = 0
-    month_list = ['','january','february','march','april','may','june','all']
     print('\n1 - January\n2 - February \n3 - March\n4 - April \
           \n5 - May\n6 - June\n7 - All Months\n')
     while month_count not in range(1,8):
@@ -38,9 +43,6 @@ def get_filters():
             print('\nNot a number!')
         
     # get user input for day of week (monday, tuesday, ... sunday, all)
-    day_count = 0
-    day_list = ['', 'monday', 'tuesday', 'wednesday', 'thursday',
-                'friday', 'saturday', 'sunday','all']
     print('\n1 - Monday\n2 - Tuesday\n3 - Wednesday\n4 - Thursday \
           \n5 - Friday\n6 - Saturday\n7 - Sunday\n8 - All Days\n')
     while day_count not in range(1,9):
