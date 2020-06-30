@@ -218,8 +218,7 @@ def user_stats(df):
         count_female = df_gender_count['Count'][0]
         count_male = df_gender_count['Count'][1]
     else:
-        count_female = 'N/A'
-        count_male = 'N/A'
+        count_female, count_male = 'N/A', 'N/A'
 
     # Display earliest, most recent, and most common year of birth; WA has no Birth Year Data
     if 'Birth Year' in df.columns:
@@ -235,9 +234,7 @@ def user_stats(df):
         most_recent_yob = df_yob.at[0,'Birth Year']
         most_common_yob = df_yob.mode().at[0,'Birth Year']
     else:
-        earliest_yob = 'N/A'
-        most_recent_yob = 'N/A'
-        most_common_yob = 'N/A'
+        earliest_yob, most_recent_yob, most_common_yob = 'N/A', 'N/A', 'N/A'
 
     #ul = 'User List" to abbreviate return statement
     ul = [count_customer, count_subscriber, count_female, \
