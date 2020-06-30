@@ -136,9 +136,11 @@ def time_stats(df):
                               str(int(start_hour_int+1)) + ':00'
     most_common_start_speech = 'The most common start time range is: '
 
-    return(most_common_month_speech + most_common_month + '\n' +
-           most_common_day_speech + most_common_day + '\n' + 
-           most_common_start_speech + most_common_start_range + '\n'
+    # tl = "time list" to abbreviate return statement
+    tl =[most_common_month_speech, most_common_month, most_common_day_speech, \
+    most_common_day, most_common_start_speech, most_common_start_range]
+
+    return(tl[0] + tl[1] + '\n' + tl[2] + tl[3] + '\n' + tl[4] + tl[5] + '\n'
            '\nThis took %s seconds.' % '{:02.3f}'.format(time.time() - \
            start_time) + '\n' + '-' * 40)
 
