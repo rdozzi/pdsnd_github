@@ -20,7 +20,14 @@ def get_filters():
     # get user input for city (chicago, new york city, washington). 
     
     city_count = 0
+    month_count = 0
+    day_count = 0
+    
     city_list = ['','chicago', 'new_york_city', 'washington']
+    month_list = ['','january','february','march','april','may','june','all']
+    day_list = ['', 'monday', 'tuesday', 'wednesday', 'thursday',
+                'friday', 'saturday', 'sunday','all']
+    
     print('\n1 - Chicago\n2 - New York City\n3 - Washington\n')
     while city_count not in range(1,4):
         try: 
@@ -30,9 +37,6 @@ def get_filters():
 
     
     # get user input for month (january, february, ... , all)
-    
-    month_count = 0
-    month_list = ['','january','february','march','april','may','june','all']
     print('\n1 - January\n2 - February \n3 - March\n4 - April \
           \n5 - May\n6 - June\n7 - All Months\n')
     while month_count not in range(1,8):
@@ -43,10 +47,6 @@ def get_filters():
         
     
     # get user input for day of week (monday, tuesday, ... sunday, all)
-    
-    day_count = 0
-    day_list = ['', 'monday', 'tuesday', 'wednesday', 'thursday',
-                'friday', 'saturday', 'sunday','all']
     print('\n1 - Monday\n2 - Tuesday\n3 - Wednesday\n4 - Thursday \
           \n5 - Friday\n6 - Saturday\n7 - Sunday\n8 - All Days\n')
     while day_count not in range(1,9):
@@ -168,9 +168,11 @@ def time_stats(df):
                               str(int(start_hour_int+1)) + ':00'
     most_common_start_speech = 'The most common start time range is: '
 
-    return(most_common_month_speech + most_common_month + '\n' +
-           most_common_day_speech + most_common_day + '\n' + 
-           most_common_start_speech + most_common_start_range + '\n'
+    # tl = "time list" to abbreviate return statement
+    tl =[most_common_month_speech, most_common_month, most_common_day_speech, \
+    most_common_day, most_common_start_speech, most_common_start_range]
+
+    return(tl[0] + tl[1] + '\n' + tl[2] + tl[3] + '\n' + tl[4] + tl[5] + '\n'
            '\nThis took %s seconds.' % '{:02.3f}'.format(time.time() - \
            start_time) + '\n' + '-' * 40)
 
@@ -263,8 +265,7 @@ def user_stats(df):
         count_female = df_gender_count['Count'][0]
         count_male = df_gender_count['Count'][1]
     else:
-        count_female = 'N/A'
-        count_male = 'N/A'
+        count_female, count_male = 'N/A', 'N/A'
 
     # Display earliest, most recent, and most common year of birth; WA has no Birth Year Data
     
@@ -284,9 +285,7 @@ def user_stats(df):
         most_recent_yob = df_yob.at[0,'Birth Year']
         most_common_yob = df_yob.mode().at[0,'Birth Year']
     else:
-        earliest_yob = 'N/A'
-        most_recent_yob = 'N/A'
-        most_common_yob = 'N/A'
+        earliest_yob, most_recent_yob, most_common_yob = 'N/A', 'N/A', 'N/A'
 
     #ul = 'User List" to abbreviate return statement
     
